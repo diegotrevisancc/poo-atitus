@@ -1,109 +1,97 @@
-package Aula05;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Loja {
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException, IOException{
 
-        int opcao, indice = 0;
-        List<String> carrinho = new ArrayList<>();
-        Scanner scan = new Scanner(System.in);
-        double dinheiroDisponivel, valorTotal = 0;
+        int opcao = 0; // Opção do menu
+        List<String> carrinho = new ArrayList<>(); // Carrinho de compras
+        Scanner scan = new Scanner(System.in); // Scanner para ler opções do menu
+        double dinheiroDisponivel, valorTotal = 0; // Dinheiro disponível e valor total da compra
 
-        System.out.println("""
-                Senhor dos pasteis
-                1 - Cachorro Quente R$ 4,00
-                2 - X-Salada R$ 4,50
-                3 - Cerveja R$ 5,00
-                4 - Refrigerante R$ 3,50
-                5 - Visualizar carrinho
-                6 - Sair """);
+        // Mostra itens da loja
+        mostraItens();
 
-        do{
+        while(opcao != 6){
             System.out.print("Escolha uma opção: ");
             opcao = scan.nextInt();
             System.out.println();
 
             switch(opcao){
-                case 1 -> {
-                    carrinho.add("[" + indice + "] Cachorro Quente - R$ 4,00");
-                    System.out.println("[" + indice + "] Cachorro Quente adicionado ao carrinho");
+                case 1 -> { 
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    carrinho.add("Cachorro Quente - R$ 4,00");
+                    System.out.println("Cachorro Quente adicionado ao carrinho\n");
                     valorTotal += 4;
-                    indice++;
                 }
-                case 2 -> {
-                    carrinho.add("[" + indice + "] X-Salada - R$ 4,50");
-                    System.out.println("[" + indice + "] X-Salada adicionado ao carrinho");
+                case 2 -> { 
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    carrinho.add("X-Salada - R$ 4,50");
+                    System.out.println("X-Salada adicionado ao carrinho\n");
                     valorTotal += 4.5;
-                    indice++;
                 }
                 case 3 -> {
-                    carrinho.add("[" + indice + "] Cerveja - R# 5,00");
-                    System.out.println("[" + indice + "] Cerveja adicionado ao carrinho");
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    carrinho.add("Cerveja - R# 5,00");
+                    System.out.println("Cerveja adicionado ao carrinho\n");
                     valorTotal += 5;
-                    indice++;
                 }
                 case 4 -> {
-                    carrinho.add("[" + indice + "] Refrigerante - R$ 3,50");
-                    System.out.println("[" + indice + "] Refrigerante adicionado ao carrinho");
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    carrinho.add("Refrigerante - R$ 3,50");
+                    System.out.println("Refrigerante adicionado ao carrinho\n");
                     valorTotal += 3.5;
-                    indice++;
                 }
                 case 5 -> {
-                    System.out.println("Seu carrinho: ");
-                    for (String i : carrinho) {
-                        if(i != null){
-                            System.out.println(i);
-                        }
-                    }
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    mostraCarrinho(carrinho, valorTotal);
                 }
                 case 6 -> {
-                    System.out.println("Saindo...");
-                    System.out.println("Obrigado pela preferência!");
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                 }
-                default -> System.out.println("Opção inválida!");
+                default -> { 
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                System.out.println("Opção inválida!"); 
+                }
             }
-
-            
-        }while(opcao != 6);
-        
+            // Mostra itens da loja
+            mostraItens();
+        }
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         // Mostrar carrinho
         System.out.println();
-        System.out.println("Seu carrinho: ");
-        for (String i : carrinho) {
-            if(i != null){
-                System.out.println(i);
-            }
-        }
+        mostraCarrinho(carrinho, valorTotal);
 
-        // Mostrar valor total
-        System.out.println();
-        System.out.printf("Valor total: R$ %.2f",valorTotal);
-        System.out.println();
 
         // Verificar se tem dinheiro suficiente
         System.out.print("Digite o valor que você tem: ");
         dinheiroDisponivel = scan.nextDouble();
 
+        
         if(dinheiroDisponivel >= valorTotal){
             System.out.println("Compra realizada com sucesso!");
         }else{
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            mostraCarrinho(carrinho, valorTotal);
             System.out.println("Você não tem dinheiro suficiente!");
-            do {
-                System.out.println("Escolha um produto para remover: ");
+            mostraItens();
+
+            while(dinheiroDisponivel < valorTotal || opcao != 6){
+                System.out.print("\nEscolha um produto para remover ou [6] para sair: ");
                 opcao = scan.nextInt();
                 switch(opcao){
-                    case 1 -> {
-                        if(itemInCarrinho("Cachorro Quente - R$ 4,00", carrinho)){
-                            carrinho.remove("Cachorro Quente - R$ 4,00");
+                    case 1 -> { 
+                        if(itemInCarrinho("Cachorro Quente - R$ 4,00", carrinho)){ // Caso o item esteja no carrinho
+                            carrinho.remove(carrinho.indexOf("Cachorro Quente - R$ 4,00")); // Remove o item do carrinho pelo índice 
                             System.out.println("Cachorro Quente removido do carrinho");
                             valorTotal -= 4;
                         } else{
                             System.out.println("Esse item não está no carrinho!");
                         }
+                        mostraCarrinho(carrinho, valorTotal);
                     }
                     case 2 -> {
                         if(itemInCarrinho("X-Salada - R$ 4,50", carrinho)){
@@ -113,6 +101,7 @@ public class Loja {
                         } else{
                             System.out.println("Esse item não está no carrinho!");
                         }
+                        mostraCarrinho(carrinho, valorTotal);
                     }
                     case 3 -> {
                         if(itemInCarrinho("Cerveja - R# 5,00", carrinho)){
@@ -122,46 +111,65 @@ public class Loja {
                         } else{
                             System.out.println("Esse item não está no carrinho!");
                         }
+                        mostraCarrinho(carrinho, valorTotal);
                     }
                     case 4 -> {
                         if(itemInCarrinho("Refrigerante - R$ 3,50", carrinho)){
                             carrinho.remove("Refrigerante - R$ 3,50");
                             System.out.println("Refrigerante removido do carrinho");
                             valorTotal -= 3.5;
-                        } else{
+                        } else{  
                             System.out.println("Esse item não está no carrinho!");
                         }
+                        mostraCarrinho(carrinho, valorTotal);
                     }
-                    case 5 -> {
-                        System.out.println("Seu carrinho: ");
-                        for (String i : carrinho) {
-                            if(i != null){
-                                System.out.println(i);
-                            }
-                        }
+                    case 5 -> {   
+                        mostraCarrinho(carrinho, valorTotal);
                     }
                     case 6 -> {
-                        System.out.println("Saindo...");
-                        System.out.println("Obrigado pela preferência!");
                     }
                     default -> System.out.println("Opção inválida!");
                 }
-            }while(dinheiroDisponivel < valorTotal);
-
+            }
+            
         }
-        
+        scan.close();
     }
     
     public static boolean itemInCarrinho(String indice, List<String> carrinho){
 
         for (String i : carrinho) {
-            if(i != null){
-                if(i.contains(indice)){
-                    return true;
-                }
+            // Para cada item do carrinho, verifica se o item é igual ao indice
+            if(i.contains(indice)){
+                return true; // Se sim, retorna true
             }
+
         }
         return false;
+    }
+
+    public static void mostraCarrinho(List<String> carrinho, double valorTotal){
+        System.out.println("-------------------------");
+        System.out.println("Seu carrinho: ");
+
+        for (String i : carrinho) { // For each para mostrar os itens do carrinho
+            
+            System.out.println(i); // Mostra cada item do carrinho
+
+        }
+
+        System.out.println("Valor: R$ " + valorTotal); // Mostra o valor total da compra
+        System.out.println("-------------------------");
+    }
+
+    public static void mostraItens() {
+         System.out.println("""
+            1 - Cachorro Quente R$ 4,00
+            2 - X-Salada R$ 4,50
+            3 - Cerveja R$ 5,00
+            4 - Refrigerante R$ 3,50
+            5 - Visualizar carrinho
+            6 - Sair """);
     }
 
     
