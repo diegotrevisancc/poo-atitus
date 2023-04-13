@@ -78,8 +78,8 @@ public class Loja {
             mostraCarrinho(carrinho, valorTotal);
             System.out.println("Você não tem dinheiro suficiente!");
             mostraItens();
-
-            while(dinheiroDisponivel < valorTotal || opcao != 6){
+            opcao = 0;
+            while(dinheiroDisponivel < valorTotal && opcao != 6){
                 System.out.print("\nEscolha um produto para remover ou [6] para sair: ");
                 opcao = scan.nextInt();
                 switch(opcao){
@@ -127,6 +127,7 @@ public class Loja {
                         mostraCarrinho(carrinho, valorTotal);
                     }
                     case 6 -> {
+                        System.out.println("Compra Cancelada!");
                     }
                     default -> System.out.println("Opção inválida!");
                 }
