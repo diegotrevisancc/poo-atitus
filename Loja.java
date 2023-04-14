@@ -51,18 +51,150 @@ public class Loja {
         System.out.println("-------------------------");
     }
 
-    public static void mostraItens() {
+    public static void mostraItensComida() {
         System.out.println("""
                 1 - Cachorro Quente R$ 4,00
                 2 - X-Salada R$ 4,50
-                3 - Cerveja R$ 5,00
-                4 - Refrigerante R$ 3,50
+                3 - Pastel de Carne R$ 5,00
+                4 - Pastel de Frango R$ 4,50
                 5 - Visualizar carrinho
                 6 - Sair """);
     }
 
+    public static void mostraItensBebidas() {
+        System.out.println("""
+                1 - Cerveja R$ 4,50
+                2 - Água R$ 10,50
+                3 - Refrigerante R$ 5,00
+                4 - Visualizar carrinho
+                5 - Sair """);
+    }
+
+    public static void mostraItens() {
+        System.out.println("""
+                1 - Cachorro Quente R$ 4,00
+                2 - X-Salada R$ 4,50
+                3 - Pastel de Carne R$ 5,00
+                4 - Pastel de Frango R$ 4,50
+                5 - Cerveja R$: 4,50
+                6 - Água R$ 10,50
+                7 - Refrigerante R$: 4,50
+                8 - Visualizar carrinho
+                9 - Sair """);
+    }
+
+    public static void finalizarCompra(List<String> carrinho, double valorTotal, double dinheiroDisponivel) throws IOException, InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        // Mostrar carrinho
+        System.out.println();
+        mostraCarrinho(carrinho, valorTotal);
+
+
+        // Verificar se tem dinheiro suficiente
+        System.out.print("Digite o valor que você tem: ");
+        dinheiroDisponivel = sc.nextDouble();
+
+
+        if (dinheiroDisponivel >= valorTotal) {
+            System.out.println("Compra realizada com sucesso!");
+        } else {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            mostraCarrinho(carrinho, valorTotal);
+            System.out.println("Você não tem dinheiro suficiente!");
+            int opcao = 0;
+            while (dinheiroDisponivel < valorTotal && opcao != 9) {
+                mostraItens();
+                System.out.print("\nEscolha um produto para remover ou [9] para sair: ");
+                opcao = sc.nextInt();
+                switch (opcao) {
+                    case 1 -> {
+                        if (itemInCarrinho("Cachorro Quente - R$ 4,00", carrinho)) { // Caso o item esteja no carrinho
+                            carrinho.remove(carrinho.indexOf("Cachorro Quente - R$ 4,00")); // Remove o item do carrinho pelo índice
+                            System.out.println("Cachorro Quente removido do carrinho");
+                            valorTotal -= 4;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 2 -> {
+                        if (itemInCarrinho("X-Salada - R$ 4,50", carrinho)) {
+                            carrinho.remove("X-Salada - R$ 4,50");
+                            System.out.println("X-Salada removido do carrinho");
+                            valorTotal -= 4.5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 3 -> {
+                        if (itemInCarrinho("Pastel de Carne - R$ 5,00", carrinho)) {
+                            carrinho.remove("Pastel de Carne - R$ 5,00");
+                            System.out.println("Pastel de carne removido do carrinho");
+                            valorTotal -= 5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 4 -> {
+                        if (itemInCarrinho("Pastel de Frango - R$ 4,50", carrinho)) {
+                            carrinho.remove("Pastel de Frango - R$ 4,50");
+                            System.out.println("Pastel de Frango removido do carrinho");
+                            valorTotal -= 3.5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 5 -> {
+                        if (itemInCarrinho("Cerveja - R$ 4,50", carrinho)) {
+                            carrinho.remove("Cerveja - R$ 4,50");
+                            System.out.println("Cerveja removido do carrinho");
+                            valorTotal -= 4.5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 6 -> {
+                        if (itemInCarrinho("Água - R$ 10,50", carrinho)) {
+                            carrinho.remove("Água - R$ 4,50");
+                            System.out.println("Água removido do carrinho");
+                            valorTotal -= 3.5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 7 -> {
+                        if (itemInCarrinho("Refrigerante - R$ 4,50", carrinho)) {
+                            carrinho.remove("Refrigerante - R$ 4,50");
+                            System.out.println("Refrigerante removido do carrinho");
+                            valorTotal -= 3.5;
+                        } else {
+                            System.out.println("Esse item não está no carrinho!");
+                        }
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 8 -> {
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 9 -> {
+                        System.out.println("Compra Cancelada!");
+                    }
+                    default -> System.out.println("Opção inválida!");
+                }
+            }
+
+        }
+        sc.close();
+    }
+
     public static void main(String[] args) throws InterruptedException, IOException {
         int categoriaOpcao = 0;
+
         while (true) {
             categoriaOpcao = menuPrincipal();
             if (categoriaOpcao <= 0 || categoriaOpcao > 3) {
@@ -72,15 +204,14 @@ public class Loja {
             }
         }
 
-        if (categoriaOpcao != 3) {
-            int opcao = 0; // Opção do menu
-            List<String> carrinho = new ArrayList<>(); // Carrinho de compras
-            Scanner scan = new Scanner(System.in); // Scanner para ler opções do menu
-            double dinheiroDisponivel, valorTotal = 0; // Dinheiro disponível e valor total da compra
+        int opcao = 0; // Opção do menu
+        List<String> carrinho = new ArrayList<>(); // Carrinho de compras
+        Scanner scan = new Scanner(System.in); // Scanner para ler opções do menu
+        double dinheiroDisponivel = 0, valorTotal = 0; // Dinheiro disponível e valor total da compra
 
-            // Mostra itens da loja
-            mostraItens();
-            opcao = 0;
+        if (categoriaOpcao == 1) {
+            mostraItensComida();
+
             while (opcao != 6) {
                 System.out.print("Escolha uma opção: ");
                 opcao = scan.nextInt();
@@ -101,15 +232,15 @@ public class Loja {
                     }
                     case 3 -> {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                        carrinho.add("Cerveja - R# 5,00");
-                        System.out.println("Cerveja adicionado ao carrinho\n");
+                        carrinho.add("Pastel de Carne - R$ 5,00");
+                        System.out.println("Pastel de Carne adicionado ao carrinho\n");
                         valorTotal += 5;
                     }
                     case 4 -> {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                        carrinho.add("Refrigerante - R$ 3,50");
-                        System.out.println("Refrigerante adicionado ao carrinho\n");
-                        valorTotal += 3.5;
+                        carrinho.add("Pastel de Frango - R$ 4,50");
+                        System.out.println("Pastel de Frango adicionado ao carrinho\n");
+                        valorTotal += 4.5;
                     }
                     case 5 -> {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -123,86 +254,57 @@ public class Loja {
                         System.out.println("Opção inválida!");
                     }
                 }
-                // Mostra itens da loja
-                mostraItens();
+                mostraItensComida();
             }
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            // Mostrar carrinho
-            System.out.println();
-            mostraCarrinho(carrinho, valorTotal);
+            finalizarCompra(carrinho, valorTotal, dinheiroDisponivel);
+            scan.close();
+        }else if(categoriaOpcao == 2){
+            mostraItensBebidas();
 
+            while (opcao != 5) {
+                System.out.print("Escolha uma opção: ");
+                opcao = scan.nextInt();
+                System.out.println();
 
-            // Verificar se tem dinheiro suficiente
-            System.out.print("Digite o valor que você tem: ");
-            dinheiroDisponivel = scan.nextDouble();
-
-
-            if (dinheiroDisponivel >= valorTotal) {
-                System.out.println("Compra realizada com sucesso!");
-            } else {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                mostraCarrinho(carrinho, valorTotal);
-                System.out.println("Você não tem dinheiro suficiente!");
-                mostraItens();
-                opcao = 0;
-                while (dinheiroDisponivel < valorTotal && opcao != 6) {
-                    System.out.print("\nEscolha um produto para remover ou [6] para sair: ");
-                    opcao = scan.nextInt();
-                    switch (opcao) {
-                        case 1 -> {
-                            if (itemInCarrinho("Cachorro Quente - R$ 4,00", carrinho)) { // Caso o item esteja no carrinho
-                                carrinho.remove(carrinho.indexOf("Cachorro Quente - R$ 4,00")); // Remove o item do carrinho pelo índice
-                                System.out.println("Cachorro Quente removido do carrinho");
-                                valorTotal -= 4;
-                            } else {
-                                System.out.println("Esse item não está no carrinho!");
-                            }
-                            mostraCarrinho(carrinho, valorTotal);
-                        }
-                        case 2 -> {
-                            if (itemInCarrinho("X-Salada - R$ 4,50", carrinho)) {
-                                carrinho.remove("X-Salada - R$ 4,50");
-                                System.out.println("X-Salada removido do carrinho");
-                                valorTotal -= 4.5;
-                            } else {
-                                System.out.println("Esse item não está no carrinho!");
-                            }
-                            mostraCarrinho(carrinho, valorTotal);
-                        }
-                        case 3 -> {
-                            if (itemInCarrinho("Cerveja - R# 5,00", carrinho)) {
-                                carrinho.remove("Cerveja - R# 5,00");
-                                System.out.println("Cerveja removido do carrinho");
-                                valorTotal -= 5;
-                            } else {
-                                System.out.println("Esse item não está no carrinho!");
-                            }
-                            mostraCarrinho(carrinho, valorTotal);
-                        }
-                        case 4 -> {
-                            if (itemInCarrinho("Refrigerante - R$ 3,50", carrinho)) {
-                                carrinho.remove("Refrigerante - R$ 3,50");
-                                System.out.println("Refrigerante removido do carrinho");
-                                valorTotal -= 3.5;
-                            } else {
-                                System.out.println("Esse item não está no carrinho!");
-                            }
-                            mostraCarrinho(carrinho, valorTotal);
-                        }
-                        case 5 -> {
-                            mostraCarrinho(carrinho, valorTotal);
-                        }
-                        case 6 -> {
-                            System.out.println("Compra Cancelada!");
-                        }
-                        default -> System.out.println("Opção inválida!");
+                switch (opcao) {
+                    case 1 -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        carrinho.add("Cerveja - R$ 4,50");
+                        System.out.println("Cerveja adicionado ao carrinho\n");
+                        valorTotal += 4.5;
+                    }
+                    case 2 -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        carrinho.add("Água - R$ 10,50");
+                        System.out.println("Àgua adicionado ao carrinho\n");
+                        valorTotal += 10.5;
+                    }
+                    case 3 -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        carrinho.add("Refrigerante - R$ 4,50");
+                        System.out.println("Refrigerante adicionado ao carrinho\n");
+                        valorTotal += 4.5;
+                    }
+                    case 4 -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        mostraCarrinho(carrinho, valorTotal);
+                    }
+                    case 5 -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                    }
+                    default -> {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        System.out.println("Opção inválida!");
                     }
                 }
-
+                mostraItensBebidas();
             }
+            finalizarCompra(carrinho, valorTotal, dinheiroDisponivel);
             scan.close();
-        } else {
+        } else if (categoriaOpcao == 3) {
             System.out.println("Até a próxima");
+        } else {
+            System.out.println("Opção inválida");
         }
     }
 
