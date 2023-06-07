@@ -1,0 +1,1 @@
+This is a project developed for the Object-Oriented Programming discipline in Atitus 2023. The main objective is to explore the principal differences between the functional and OOP paradigms.
