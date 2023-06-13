@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Sale {
+public class Venda {
     private int id;
-    private String clientName;
-    private List<ItemSale> itens;
+    private String nomeCliente;
+    private List<ItemVenda> itens;
     private LocalDateTime time;
 
-    public Sale(String clientName) {
+    public Venda(String nomeCliente) {
         this.itens = new ArrayList<>();
         this.id = 99;
-        this.clientName = clientName;
+        this.nomeCliente = nomeCliente;
         this.time = LocalDateTime.now();
     }
 
@@ -23,16 +23,16 @@ public class Sale {
     public void setId(int id) {
         this.id = id;
     }
-    public String getClientName() {
-        return clientName;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
-    public List<ItemSale> getItens() {
+    public List<ItemVenda> getItens() {
         return itens;
     }
-    public void setItens(List<ItemSale> itens) {
+    public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
     public LocalDateTime getTime() {
