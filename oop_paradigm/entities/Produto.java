@@ -48,7 +48,7 @@ public class Produto {
 	
 	@Override
 	public boolean equals(Object obj) {
-		Product other = (Product) obj;
+		Produto other = (Produto) obj;
 		if (this.id == other.getId()) {
 			return true;
 		}
