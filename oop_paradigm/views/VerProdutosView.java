@@ -14,7 +14,7 @@ public class VerProdutosView {
             System.out.println("2 - Comidas");
             System.out.println("3 - Voltar");
             System.out.print("Opção: ");
-            int option = Aplicacao.scanner.nextInt();
+            int option = Integer.parseInt(Aplicacao.scanner.nextLine());
             switch (option) {
                 case 1:
                     new VerBebidasView().criarBebidasView(cliente, venda);

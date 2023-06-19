@@ -50,7 +50,6 @@ public class VerBebidasView {
     private boolean validarMaioridade() {
         boolean formatoValido = false;
         String dataDeNascimento = "";
-        Aplicacao.scanner.nextLine();
         while (!formatoValido) {
             System.out.println("Insira sua data de nascimento no formato dd/mm/yyyy ");
             dataDeNascimento = Aplicacao.scanner.nextLine();
@@ -73,16 +72,15 @@ public class VerBebidasView {
         }
     }
 
-    private void adicionarBebidaAoCarrinho(int opcao) {
-        Scanner sc = new Scanner(System.in);
+    private void adicionarBebidaAoCarrinho(int opcao) { /*Aplicar herança aqui*/
         System.out.println("Insira a quantidade: ");
-        int quantidade = sc.nextInt();
+        int quantidade = Integer.parseInt(Aplicacao.scanner.nextLine());
+
         Bebida bebida = this.service.findAllBebidas().get(opcao);
         ItemVenda item = new ItemVenda(new Random().nextInt(), bebida, quantidade);
 
         VendaService vs = new VendaService(this.venda);
         vs.adicionarAoCarrinho(item);
-        sc.close();
     }
 
 
@@ -96,10 +94,11 @@ public class VerBebidasView {
         }
 
         System.out.println("Insira o número da bebida que deseja inserir no carrinho ou aperte 0 para sair dessa tela");
-        int opcao = Aplicacao.scanner.nextInt() - 1;
+        int opcao = Integer.parseInt(Aplicacao.scanner.nextLine());
 
-        if (opcao != 0 && (opcao >= 1 && opcao < this.service.findAll().size())) {
 
+        if (opcao != 0 && (opcao >= 1 && opcao <= this.service.findAll().size())) {
+            opcao -= 1;
             boolean alcoolica = this.service.findAllBebidas().get(opcao).getAlcoolica();
 
             if (!alcoolica) {
@@ -120,7 +119,6 @@ public class VerBebidasView {
         }
         System.out.println("Aperte enter para voltar");
         Aplicacao.scanner.nextLine();
-        //String voltar = Aplicacao.scanner.nextLine();
         return false;
     }
 }

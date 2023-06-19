@@ -1,7 +1,6 @@
 package oop_paradigm.services;
 
 import oop_paradigm.entities.ItemVenda;
-import oop_paradigm.entities.Produto;
 import oop_paradigm.entities.Venda;
 
 public class VendaService {

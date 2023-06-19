@@ -9,19 +9,17 @@ import java.util.Random;
 public class PrincipalView  {
     public void criarViewPrincipal() {
         System.out.println("Bem-vindo a pastelaria do Fernando!");
-        System.out.print("Por favor, nos informe seu nome: ");
-        String nome = Aplicacao.scanner.next();
+        System.out.println("Por favor, nos informe seu nome: ");
+        String nome = Aplicacao.scanner.nextLine();
         Cliente cliente = new Cliente(new Random().nextInt(), nome);
         Venda venda = new Venda(cliente.getName());
         System.out.println("Beleza, " + nome);
         System.out.println("Selecione uma opção");
-        System.out.println("1 - Produtos");
-        System.out.println("2 - Carrinho");
-        System.out.println("3 - Pagamento");
+        System.out.println("1 - Comprar");
+        System.out.println("2 - Carrinho"); /*Dar a opção de remover itens do carrinho */
+        System.out.println("3 - Pagamento"); /* Inserção simples de valor */
         System.out.println("4 - Sair");
-
-        int opcao = Aplicacao.scanner.nextInt();
-
+        int opcao = Integer.parseInt(Aplicacao.scanner.nextLine());
         switch(opcao) {
             case 1:
                 new VerProdutosView().criarVerProdutosView(cliente, venda);
