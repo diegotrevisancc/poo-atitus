@@ -2,6 +2,8 @@ package oop_paradigm.views;
 
 import oop_paradigm.Aplicacao;
 import oop_paradigm.entities.Cliente;
+import oop_paradigm.entities.Venda;
+
 import java.util.Random;
 
 public class PrincipalView  {
@@ -10,6 +12,7 @@ public class PrincipalView  {
         System.out.print("Por favor, nos informe seu nome: ");
         String nome = Aplicacao.scanner.next();
         Cliente cliente = new Cliente(new Random().nextInt(), nome);
+        Venda venda = new Venda(cliente.getName());
         System.out.println("Beleza, " + nome);
         System.out.println("Selecione uma opção");
         System.out.println("1 - Produtos");
@@ -21,7 +24,7 @@ public class PrincipalView  {
 
         switch(opcao) {
             case 1:
-                new VerProdutosView().criarVerProdutosView();
+                new VerProdutosView().criarVerProdutosView(cliente, venda);
                 break;
             case 2:
                 break;

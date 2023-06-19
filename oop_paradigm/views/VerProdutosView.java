@@ -1,9 +1,12 @@
 package oop_paradigm.views;
 
 import oop_paradigm.Aplicacao;
+import oop_paradigm.entities.Cliente;
+import oop_paradigm.entities.Venda;
+import oop_paradigm.services.VendaService;
 
 public class VerProdutosView {
-    public void criarVerProdutosView() {
+    public void criarVerProdutosView(Cliente cliente, Venda venda) {
         while (true) {
             Util.limparTela();
             System.out.println("Quais produtos você deseja ver?");
@@ -14,7 +17,7 @@ public class VerProdutosView {
             int option = Aplicacao.scanner.nextInt();
             switch (option) {
                 case 1:
-                    new VerBebidasView().criarBebidasView();
+                    new VerBebidasView().criarBebidasView(cliente, venda);
                     break;
                 case 2:
                     break;
@@ -29,6 +32,7 @@ public class VerProdutosView {
                     }
                     break;
             }
+            System.out.println(new VendaService(venda).getPrecoTotal(venda));
         }
     }
 }

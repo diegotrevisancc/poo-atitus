@@ -35,6 +35,10 @@ public class Venda {
     public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
+
+    public void setItem(ItemVenda itemVenda) {
+        this.itens.add(itemVenda);
+    }
     public LocalDateTime getTime() {
         return time;
     }

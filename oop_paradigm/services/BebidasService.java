@@ -14,12 +14,16 @@ public class BebidasService implements ProdutoService {
                 List.of(
                         new Bebida(1, "Café", 1.50, false),
                         new Bebida(2, "Água", 0.50, false),
-                        new Bebida(3, "Cerveja", 1.50, true)
+                        new Bebida(3, "Cerveja", 2.0, true)
                 )
         );
     }
     @Override
     public List<Produto> findAll() {
+        return new ArrayList<>(this.bebidasAvaiable);
+    }
+
+    public List<Bebida> findAllBebidas() {
         return new ArrayList<>(this.bebidasAvaiable);
     }
 
@@ -32,4 +36,6 @@ public class BebidasService implements ProdutoService {
         }
         return null;
     }
+
+
 }

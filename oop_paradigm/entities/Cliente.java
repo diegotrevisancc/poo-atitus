@@ -1,9 +1,13 @@
 package oop_paradigm.entities;
 
+import java.util.Date;
+
 public class Cliente {
     private int id;
     private String name;
-    private String dataDeNascimento;
+    private Date dataDeNascimento;
+
+    private int idade;
 
     public Cliente(int id, String name) {
         this.id = id;
@@ -26,11 +30,19 @@ public class Cliente {
         this.name = name;
     }
 
-    public String getDataDeNascimento() {
+    public Date getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(Date dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
     }
 }
