@@ -6,32 +6,37 @@ import java.util.ArrayList;
 
 public class Venda {
     private int id;
-    private String nomeCliente;
+    private Cliente cliente;
     private List<ItemVenda> itens;
     private LocalDateTime time;
 
-    public Venda(String nomeCliente) {
+    public Venda(Cliente cliente) {
         this.itens = new ArrayList<>();
         this.id = 99;
-        this.nomeCliente = nomeCliente;
+        this.cliente = cliente;
         this.time = LocalDateTime.now();
     }
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
-    public String getNomeCliente() {
-        return nomeCliente;
+
+    public Cliente getCliente() {
+        return cliente;
     }
-    public void setNomeCliente(String nomeCliente) {
-        this.nomeCliente = nomeCliente;
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+
     public List<ItemVenda> getItens() {
         return itens;
     }
+
     public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
@@ -39,9 +44,11 @@ public class Venda {
     public void setItem(ItemVenda itemVenda) {
         this.itens.add(itemVenda);
     }
+
     public LocalDateTime getTime() {
         return time;
     }
+
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
