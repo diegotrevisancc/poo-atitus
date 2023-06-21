@@ -29,7 +29,7 @@ public class PrincipalView  {
             int opcao = Integer.parseInt(Aplicacao.scanner.nextLine());
             switch(opcao) {
                 case 1:
-                    new VerProdutosView().criarVerProdutosView(vendaService);
+                    new VerProdutosView().criarVerProdutosView();
                     break;
                 case 2:
                     break;
