@@ -8,5 +8,6 @@ public class Aplicacao {
     public static void main(String[] args) {
         PrincipalView mainView = new PrincipalView();
         mainView.criarViewPrincipal();
+        Aplicacao.scanner.close();
     }
 }

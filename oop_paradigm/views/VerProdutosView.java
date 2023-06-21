@@ -10,8 +10,9 @@ import oop_paradigm.services.VendaService;
 import java.util.Random;
 
 public class VerProdutosView {
+    private boolean comprar = true;
     public void criarVerProdutosView(VendaService vendaService) {
-        while (true) {
+        while (this.comprar) {
             Util.limparTela();
             System.out.println("Quais produtos você deseja ver?");
             System.out.println("1 - Bebidas");
@@ -26,6 +27,7 @@ public class VerProdutosView {
                 case 2:
                     break;
                 case 3:
+                    this.comprar = false;
                     break;
                 default:
                     System.out.println("Opção inválida!");
