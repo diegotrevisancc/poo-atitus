@@ -5,19 +5,16 @@ import oop_paradigm.entities.Cliente;
 import oop_paradigm.entities.Produto;
 import oop_paradigm.entities.Venda;
 import oop_paradigm.services.ProdutoService;
-import oop_paradigm.services.VendaService;
 
 import java.util.List;
 
-import static oop_paradigm.views.PrincipalView.vendaService;
-
-public abstract class VerConsumiveisView {
+public abstract class ConsumiveisView {
     private Cliente cliente;
     private Venda venda;
 
     private ProdutoService service = null;
 
-    public VerConsumiveisView() {
+    public ConsumiveisView() {
         this.cliente = PrincipalView.vendaService.getVenda().getCliente();
         this.venda = PrincipalView.vendaService.getVenda();
     }

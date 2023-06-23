@@ -3,10 +3,10 @@ package oop_paradigm.views;
 import oop_paradigm.entities.Produto;
 import oop_paradigm.services.ComidaService;
 
-public class VerComidasView extends VerConsumiveisView {
+public class ComidasView extends ConsumiveisView {
     public ComidaService service = new ComidaService();
 
-    public VerComidasView() {
+    public ComidasView() {
         super();
     }
 

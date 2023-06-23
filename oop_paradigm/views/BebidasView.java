@@ -1,24 +1,16 @@
 package oop_paradigm.views;
 
-import oop_paradigm.Aplicacao;
-import oop_paradigm.entities.Cliente;
-import oop_paradigm.entities.ItemVenda;
-import oop_paradigm.entities.Produto;
-import oop_paradigm.entities.Venda;
 import oop_paradigm.entities.produto.Bebida;
 import oop_paradigm.services.BebidasService;
 import oop_paradigm.services.ClienteService;
-import oop_paradigm.services.VendaService;
-
-import java.util.*;
 
 import static oop_paradigm.views.PrincipalView.vendaService;
 
 
-public class VerBebidasView extends VerConsumiveisView {
+public class BebidasView extends ConsumiveisView {
     public BebidasService service = new BebidasService();
 
-    public VerBebidasView() {
+    public BebidasView() {
         super();
     }
 

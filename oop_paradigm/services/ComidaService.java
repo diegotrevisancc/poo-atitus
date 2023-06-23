@@ -13,7 +13,8 @@ public class ComidaService implements ProdutoService {
                 List.of(
                         new Produto(1, "Pastel de Carne", 4.50),
                         new Produto(2, "Pastel de Frango", 5.50),
-                        new Produto(3, "Pastel de Queijo", 4.0)
+                        new Produto(3, "Pastel de Queijo", 4.0),
+                        new Produto(3, "Pastel de Vento", 2.0)
                 )
         );
     }

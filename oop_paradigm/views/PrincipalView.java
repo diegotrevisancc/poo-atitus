@@ -23,15 +23,18 @@ public class PrincipalView  {
         while(this.venda) {
             System.out.println("Selecione uma opção");
             System.out.println("1 - Comprar");
-            System.out.println("2 - Carrinho"); /*Dar a opção de remover itens do carrinho */
-            System.out.println("3 - Pagamento"); /* Inserção simples de valor */
+            System.out.println("2 - Carrinho");
+            System.out.println("3 - Pagamento");
             System.out.println("4 - Sair");
             int opcao = Integer.parseInt(Aplicacao.scanner.nextLine());
             switch(opcao) {
                 case 1:
-                    new VerProdutosView().criarVerProdutosView();
+                    new ProdutosView().criarVerProdutosView();
+                    Util.limparTela();
                     break;
                 case 2:
+                    new CarrinhoView().criarCarrinhoView();
+                    Util.limparTela();
                     break;
                 case 3:
                     break;

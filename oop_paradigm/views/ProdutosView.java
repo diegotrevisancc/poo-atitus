@@ -1,17 +1,10 @@
 package oop_paradigm.views;
 
 import oop_paradigm.Aplicacao;
-import oop_paradigm.entities.Cliente;
-import oop_paradigm.entities.ItemVenda;
-import oop_paradigm.entities.Produto;
-import oop_paradigm.entities.Venda;
 import oop_paradigm.services.BebidasService;
 import oop_paradigm.services.ComidaService;
-import oop_paradigm.services.VendaService;
 
-import java.util.Random;
-
-public class VerProdutosView {
+public class ProdutosView {
     private boolean comprar = true;
 
     public void criarVerProdutosView() {
@@ -25,11 +18,11 @@ public class VerProdutosView {
             int option = Integer.parseInt(Aplicacao.scanner.nextLine());
             switch (option) {
                 case 1:
-                    VerBebidasView bebidasView = new VerBebidasView();
+                    BebidasView bebidasView = new BebidasView();
                     bebidasView.criarConsumiveisView(new BebidasService());
                     break;
                 case 2:
-                    VerComidasView comidasView = new VerComidasView();
+                    ComidasView comidasView = new ComidasView();
                     comidasView.criarConsumiveisView(new ComidaService());
                     break;
                 case 3:
