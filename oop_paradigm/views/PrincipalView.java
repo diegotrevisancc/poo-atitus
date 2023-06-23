@@ -4,7 +4,6 @@ import oop_paradigm.Aplicacao;
 import oop_paradigm.entities.Cliente;
 import oop_paradigm.entities.Venda;
 import oop_paradigm.services.VendaService;
-
 import java.util.Random;
 
 public class PrincipalView  {
@@ -37,12 +36,15 @@ public class PrincipalView  {
                     Util.limparTela();
                     break;
                 case 3:
+                    new PagamentoView().criarPagamentoView();
+                    this.venda = false;
+                    Util.limparTela();
                     break;
                 case 4:
-                    System.out.println("Até a próxima!");
                     this.venda = false;
                     break;
             }
         }
+        System.out.println("Até a próxima!");
     }
 }
