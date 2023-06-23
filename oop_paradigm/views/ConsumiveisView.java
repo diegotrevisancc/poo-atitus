@@ -27,7 +27,7 @@ public abstract class ConsumiveisView {
             System.out.println(i + " - " + consumivel.get(i - 1));
         }
 
-        System.out.println("Insira o número da bebida que deseja inserir no carrinho ou aperte 0 para sair dessa tela");
+        System.out.println("Insira o número do item que deseja inserir no carrinho ou aperte 0 para sair dessa tela");
         int opcao = Integer.parseInt(Aplicacao.scanner.nextLine());
         if (opcao != 0 && (opcao >= 1 && opcao <= this.service.findAll().size())) {
             this.consumivelEspecificoView(opcao);
